@@ -45,6 +45,7 @@ const DELETE_DONATION = async (id) => {
     }
 }
 
+//update donation
 const UPDATE_DONATION = async (id, donation) => {
     try {
         const UPDATED_DONATION = await db.one(`UPDATE donations SET user_id=$1, category=$2, title=$3, description=$4, date=$5, donation=$6 WHERE id=$7 RETURNING *`, [donation.user_id, donation.category, donation.title, donation.description, donation.date, id])
