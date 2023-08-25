@@ -28,8 +28,9 @@ const GET_A_FORUM = async (id) => {
 //create a forum
 const CREATE_FORUM = async (forumToAdd) => {
     try {
-        const NEW_FORUM = await db.one(`INSERT INTO forums user_id, title, content, date, category) VALUES ($1, $2, $3, $4, $5)` [forumToAdd.user_id, forumToAdd.title, forumToAdd.content, forumToAdd.date, forumToAdd.category])
-        return NEW_FORUM
+        const NEW_FORUM = await db.one(`INSERT INTO forums (user_id, title, content, date, category) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [forumToAdd.user_id, forumToAdd.title, forumToAdd.content, forumToAdd.date, forumToAdd.category]);
+        return NEW_FORUM;
+    
     } catch (error) {
         return error
     }
@@ -48,7 +49,7 @@ const DELETE_FORUM = async (id) => {
 //update forum
 const UPDATE_FORUM = async (id, forum) => {
     try {
-        const UPDATED_FORUM = await db.one(`UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5, WHERE id=$6 RETURNING *`, [forum.user_id, forum.title, donation.content, forum.date, forum.category, id])
+        const UPDATED_FORUM = await db.one(`UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5 WHERE id=$6 RETURNING *`, [forum.user_id, forum.title, forum.content, forum.date, forum.category, id])
 
         return UPDATED_FORUM
     } catch (error) {
