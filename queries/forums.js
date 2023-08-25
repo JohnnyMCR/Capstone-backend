@@ -48,7 +48,7 @@ const DELETE_FORUM = async (id) => {
 //update forum
 const UPDATE_FORUM = async (id, forum) => {
     try {
-        const UPDATED_FORUM = await db.one(`UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5, WHERE id=$6 RETURNING *`, [forum.user_id, forum.title, donation.content, forum.date, forum.category, id])
+        const UPDATED_FORUM = await db.one(`UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5, WHERE id=$6 RETURNING *`, [forum.user_id, forum.title, forum.content, forum.date, forum.category, id])
 
         return UPDATED_FORUM
     } catch (error) {
