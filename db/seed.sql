@@ -1,11 +1,8 @@
 \c carevillage_dev
-
-
-
 INSERT INTO profile (username, password, address, email)
 VALUES
-  ('john_doe', 'hashed_password', '123 Main St', 'john@example.com'),
-  ('jane_smith', 'hashed_password', '456 Elm Ave', 'jane@example.com');
+  ('john_doe', 'passwword1', '123 Main St', 'john@example.com'),
+  ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com');
 
 
 
@@ -23,7 +20,7 @@ VALUES
 
 
 
-INSERT INTO donations (user_id, category, title, description, date, img)
+INSERT INTO donations (user_id, category, title, description, date)
 VALUES
   (1, 'Charity', 'Supporting Local Food Drive', 'Donating non-perishable food items for the community food drive.', '2023-08-10'),
   (1, 'Education', 'Donating Books for Local School', 'Contributing books for the school library to encourage reading among students.', '2023-08-15');

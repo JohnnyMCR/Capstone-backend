@@ -28,7 +28,7 @@ const GET_A_DONATION = async (id) => {
 //create a donation
 const CREATE_DONATION = async (donationToAdd) => {
     try {
-        const NEW_DONATION = await db.one(`INSERT INTO donations user_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6)` [donationToAdd.user_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
+        const NEW_DONATION = await db.one(`INSERT INTO donations (user_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6)` [donationToAdd.user_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
         return NEW_DONATION
     } catch (error) {
         return error
