@@ -28,7 +28,7 @@ const GET_A_PROFILE = async (id) => {
 //create a profile
 const CREATE_PROFILE = async (profileToAdd) => {
     try {
-        const NEW_PROFILE = await db.one(`INSERT INTO profile username, password, address, email) VALUES ($1, $2, $3, $4)` [profileToAdd.username, profileToAdd.password, profileToAdd.address, profileToAdd.email])
+        const NEW_PROFILE = await db.one(`INSERT INTO (profile username, password, address, email) VALUES ($1, $2, $3, $4)` [profileToAdd.username, profileToAdd.password, profileToAdd.address, profileToAdd.email])
         return NEW_PROFILE
     } catch (error) {
         return error
