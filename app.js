@@ -15,7 +15,7 @@ app.use(logger('dev'));
 app.use("/forums", forumsController)
 app.use("/donations", donationsController)
 app.use("/comments", commentController)
-app.use("/api/profiles", profileController)
+app.use("/profiles", profileController)
 
 
 
