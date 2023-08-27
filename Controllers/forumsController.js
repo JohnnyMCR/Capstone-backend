@@ -41,8 +41,8 @@ forums.post("/", async (req, res) => {
 forums.delete("/:id", async (req, res) => {
     const {id} = req.params;
     try {
-        const DELETED_FORUM_FORUM = await DELETE_FORUM(id);
-        res.status(200).json(DELETED_FORUM_FORUM);
+        const DELETED_FORUM = await DELETE_FORUM(id);
+        res.status(200).json(DELETED_FORUM);
     } catch (error) {
         res.status(400).json({error: error});
     };
