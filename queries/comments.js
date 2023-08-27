@@ -29,7 +29,7 @@ const getAComment = async (id) => {
 //create a comment
 const createComment = async (commentToAdd) => {
     try {
-        const newComment = await db.one(`INSERT INTO comments (post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *` [commentToAdd.post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newComment = await db.one(`INSERT INTO comments (post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [commentToAdd.post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
         return newComment
     } catch (error) {
         return error

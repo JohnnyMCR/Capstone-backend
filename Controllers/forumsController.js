@@ -1,13 +1,19 @@
 const express = require("express");
 const forums = express.Router();
-const {GET_ALL_FORUMS, GET_A_FORUM, CREATE_FORUM, DELETE_FORUM, UPDATE_FORUM} = require('../queries/forums');
+const {
+    getAllForums,
+    getAForum,
+    createForum,
+    deleteForum,
+    updateForum
+} = require('../queries/forums');
 
 
 //show all forums
 forums.get("/", async (req, res) => {
-    const ALL_FORUMS = await GET_ALL_FORUMS();
-    if (ALL_FORUMS) {
-        return res.status(202).json(ALL_FORUMS);
+    const allForums = await getAllForums();
+    if (allForums) {
+        return res.status(202).json(allForums);
     } else {
         res.status(500).json({error: "Server Error"})
     };
@@ -16,9 +22,9 @@ forums.get("/", async (req, res) => {
 //show sinlge forum
 forums.get("/:id", async (req, res) => {
     const {id} = req.params
-    const A_FORUM = await GET_A_FORUM(id);
-    if (A_FORUM) {
-        return res.status(202).json(A_FORUM);
+    const aForum = await getAForum(id);
+    if (aForum) {
+        return res.status(202).json(aForum);
     } else {
         res.status(500).json({error: "Server Error"})
     };
@@ -27,10 +33,10 @@ forums.get("/:id", async (req, res) => {
 
 //create new post
 forums.post("/", async (req, res) => {
-    const NEW_FORUM = req.body;
+    const newForum = req.body;
     try {
-        const CREATED_FORUM = await CREATE_FORUM(NEW_FORUM)
-        res.status(200).json(CREATED_FORUM);
+        const createdForum = await createForum(newForum)
+        res.status(200).json(createdForum);
     } catch (error) {
         res.status(400).json({error: error});  
     };
@@ -41,8 +47,8 @@ forums.post("/", async (req, res) => {
 forums.delete("/:id", async (req, res) => {
     const {id} = req.params;
     try {
-        const DELETED_FORUM = await DELETE_FORUM(id);
-        res.status(200).json(DELETED_FORUM);
+        const deletedForum = await deleteForum(id);
+        res.status(200).json(deletedForum);
     } catch (error) {
         res.status(400).json({error: error});
     };
@@ -52,8 +58,8 @@ forums.put("/:id", async (req, res) => {
     const {id} = req.params;
     const {body} = req;
     try {
-        const UPDATED_FORUM = await UPDATE_FORUM(id, body);
-        res.status(200).json(UPDATED_FORUM);
+        const updatedForum = await updateForum(id, body);
+        res.status(200).json(updatedForum);
     } catch (error) {
         res.status(400).json({error: error})    
     };

@@ -29,7 +29,7 @@ const getADonationsComment = async (id) => {
 //create a donation comment
 const createDonationsComment = async (commentToAdd) => {
     try {
-        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donation_post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *` [commentToAdd.donation_post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donation_post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [commentToAdd.donation_post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
         return newDonationsComment
     } catch (error) {
         return error
