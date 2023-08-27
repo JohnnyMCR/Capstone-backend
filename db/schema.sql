@@ -5,7 +5,7 @@ CREATE DATABASE carevillage_dev;
 \c carevillage_dev
 
 
-CREATE TABLE profile (
+CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
@@ -24,9 +24,9 @@ CREATE TABLE forums (
     category VARCHAR NOT NULL
 );
 
-DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS comments;
 
-CREATE TABLE comment (
+CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER REFERENCES forums (id),
     user_id INTEGER REFERENCES profile (id),
@@ -46,9 +46,9 @@ CREATE TABLE donations (
     img VARCHAR
 );
 
-DROP TABLE IF EXISTS donations_comment;
+DROP TABLE IF EXISTS donations_comments;
 
-CREATE TABLE donations_comment (
+CREATE TABLE donations_comments (
     id SERIAL PRIMARY KEY,
     donation_post_id INTEGER REFERENCES donations (id),
     user_id INTEGER REFERENCES profile (id),

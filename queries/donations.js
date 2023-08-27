@@ -5,10 +5,10 @@ const db = require(`../db/dbConfig`)
 
 // index of all donations
 
-const GET_ALL_DONATIONS = async () => {
+const getAllDonations = async () => {
     try {
-        const ALL_DONATIONS = await db.any(`SELECT * FROM donations`)
-        return ALL_DONATIONS; 
+        const allDonations = await db.any(`SELECT * FROM donations`)
+        return allDonations; 
     } catch (error) {
         return error
     }
@@ -16,50 +16,50 @@ const GET_ALL_DONATIONS = async () => {
 
 //show a donation
 
-const GET_A_DONATION = async (id) => {
+const getADonation = async (id) => {
     try {
-        const DONATION = await db.one(`SELECT * FROM donations WHERE id=$1`, id)
-        return DONATION
+        const donation = await db.one(`SELECT * FROM donations WHERE id=$1`, id)
+        return donation
     } catch (error) {
         return error
     }
 }
 
 //create a donation
-const CREATE_DONATION = async (donationToAdd) => {
+const createDonation = async (donationToAdd) => {
     try {
-        const NEW_DONATION = await db.one(`INSERT INTO donations (user_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6)` [donationToAdd.user_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
-        return NEW_DONATION
+        const newDonation = await db.one(`INSERT INTO donations (user_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6)` [donationToAdd.user_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
+        return newDonation
     } catch (error) {
         return error
     }
 }
 
 //delete donation
-const DELETE_DONATION = async (id) => {
+const deleteDonation = async (id) => {
     try {
-        const DELETED_DONATION = await db.one(`DELETE FROM donations WHERE id=$1 RETURNING *`, id)
-        return DELETED_DONATION
-    }catch (error) {
+        const deletedDonation = await db.one(`DELETE FROM donations WHERE id=$1 RETURNING *`, id)
+        return deletedDonation
+    } catch (error) {
         return error
     }
 }
 
 //update donation
-const UPDATE_DONATION = async (id, donation) => {
+const updateDonation = async (id, donation) => {
     try {
-        const UPDATED_DONATION = await db.one(`UPDATE donations SET user_id=$1, category=$2, title=$3, description=$4, date=$5, img=$6 WHERE id=$7 RETURNING *`, [donation.user_id, donation.category, donation.title, donation.description, donation.date, donation.img, id])
+        const updatedDonation = await db.one(`UPDATE donations SET user_id=$1, category=$2, title=$3, description=$4, date=$5, img=$6 WHERE id=$7 RETURNING *`, [donation.user_id, donation.category, donation.title, donation.description, donation.date, donation.img, id])
 
-        return UPDATED_DONATION
+        return updatedDonation
     } catch (error) {
         return error
     }
 }
 
 module.exports = {
-    GET_ALL_DONATIONS,
-    GET_A_DONATION,
-    CREATE_DONATION,
-    DELETE_DONATION,
-    UPDATE_DONATION
+    getAllDonations,
+    getADonation,
+    createDonation,
+    deleteDonation,
+    updateDonation
 }
