@@ -49,7 +49,7 @@ const deleteDonationsComment = async (id) => {
 //update comment
 const updateDonationsComment = async (id, comment) => {
     try {
-        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donation_post_id=$1, user_id=$2, content=$3, date=$4, WHERE id=$5 RETURNING *`, [comment.donations_post_id, comment.user_id, comment.content, comment.date, id])
+        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donation_post_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *`, [comment.donations_post_id, comment.user_id, comment.content, comment.date, id])
 
         return updatedDonationsComment
     } catch (error) {
