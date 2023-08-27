@@ -29,7 +29,7 @@ const getALike = async (id) => {
 //create a like
 const createLike = async (likeToAdd) => {
     try {
-        const newLike = await db.one(`INSERT INTO likes (post_id, user_id) VALUES ($1, $2)` [likeToAdd.post_id, likeToAdd.user_id])
+        const newLike = await db.one(`INSERT INTO likes (post_id, user_id) VALUES ($1, $2) RETURNING *` [likeToAdd.post_id, likeToAdd.user_id])
         return newLike
     } catch (error) {
         return error
