@@ -1,55 +1,62 @@
 const express = require('express');
-const { GET_ALL_COMMENTS, GET_A_COMMENT, CREATE_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } = require('../queries/comment');
-const comment = express.Router();
+const comments = express.Router();
+const {
+    getAllComments,
+    getAComment,
+    createComment,
+    deleteComment,
+    updateComment
+} = require('../queries/comments');
 
 
-comment.get("/", async (req, res) => {
-    const ALL_COMMENT = await GET_ALL_COMMENTS();
-    if (ALL_COMMENT) {
-        return res.status(202).json(ALL_COMMENT);
+
+comments.get("/", async (req, res) => {
+    const allComments = await getAllComments();
+    if (allComments) {
+        return res.status(202).json(allComments);
     } else {
         res.status(500).json({error: "Server Error"})
     };
 });
 
-comment.get("/:id", async (req, res) => {
+comments.get("/:id", async (req, res) => {
     const {id} = req.params
-    const A_COMMENT = await GET_A_COMMENT(id);
-    if (A_COMMENT) {
-        return res.status(202).json(A_COMMENT);
+    const aComment = await getAComment(id);
+    if (aComment) {
+        return res.status(202).json(aComment);
     } else {
         res.status(500).json({error: "Server Error"})
     };
 });
 
-comment.post("/", async (req, res) => {
-    const NEW_COMMENT = req.body;
+comments.post("/", async (req, res) => {
+    const newComment = req.body;
     try {
-        const CREATED_COMMENT = await CREATE_COMMENT(NEW_COMMENT)
-        res.status(200).json(CREATED_COMMENT);
+        const createdComment = await createComment(newComment)
+        res.status(200).json(createdComment);
     } catch (error) {
         res.status(400).json({error: error});  
     };
 });
 
-comment.delete("/:id", async (req, res) => {
+comments.delete("/:id", async (req, res) => {
     const {id} = req.params;
     try {
-        const DELETED_COMMENT = await DELETE_COMMENT(id);
-        res.status(200).json(DELETED_COMMENT);
+        const deletedComment = await deleteComment(id);
+        res.status(200).json(deletedComment);
     } catch (error) {
         res.status(400).json({error: error});
     };
 });
-comment.put("/:id", async (req, res) => {
+comments.put("/:id", async (req, res) => {
     const {id} = req.params;
     const {body} = req;
     try {
-        const UPDATED_COMMENT = await UPDATE_COMMENT(id, body);
-        res.status(200).json(UPDATED_COMMENT);
+        const updatedComment = await updateComment(id, body);
+        res.status(200).json(updatedComment);
     } catch (error) {
         res.status(400).json({error: error})    
     };
 });
 
-module.exports = comment;
+module.exports = comments;
