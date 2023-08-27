@@ -1,5 +1,5 @@
 \c carevillage_dev
-INSERT INTO profile (username, password, address, email)
+INSERT INTO profiles (username, password, address, email)
 VALUES
   ('john_doe', 'passwword1', '123 Main St', 'john@example.com'),
   ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com');
@@ -13,7 +13,7 @@ VALUES
   (1, 'Favorite Programming Languages', 'What are your favorite programming languages and why?', '2023-08-05', 'Technology');
 
 
-INSERT INTO comment (post_id, user_id, content, date)
+INSERT INTO comments (post_id, user_id, content, date)
 VALUES
   (1, 2, 'I completely agree! Learning programming is such an exciting journey.', '2023-08-02'),
   (2, 2, 'I love Python for its simplicity and versatility.', '2023-08-06');
