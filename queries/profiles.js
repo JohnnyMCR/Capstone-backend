@@ -7,7 +7,7 @@ const db = require(`../db/dbConfig`)
 
 const getAllProfiles = async () => {
     try {
-        const allProfiles = await db.any(`SELECT * FROM profiles`)
+        const allProfiles = await db.any('SELECT * FROM profiles')
         return allProfiles; 
     } catch (error) {
         return error
@@ -18,7 +18,7 @@ const getAllProfiles = async () => {
 
 const getAProfile = async (id) => {
     try {
-        const profile = await db.one(`SELECT * FROM profiles WHERE id=$1`, id)
+        const profile = await db.one('SELECT * FROM profiles WHERE id=$1', id)
         return profile
     } catch (error) {
         return error
@@ -28,7 +28,7 @@ const getAProfile = async (id) => {
 //create a profile
 const createProfile = async (profileToAdd) => {
     try {
-        const newProfile = await db.one(`INSERT INTO profiles (username, password, address, email) VALUES ($1, $2, $3, $4) RETURNING *`, [profileToAdd.username, profileToAdd.password, profileToAdd.address, profileToAdd.email])
+        const newProfile = await db.one('INSERT INTO profiles (username, password, address, email) VALUES ($1, $2, $3, $4) RETURNING *', [profileToAdd.username, profileToAdd.password, profileToAdd.address, profileToAdd.email])
         return newProfile
     } catch (error) {
         return error
@@ -38,7 +38,7 @@ const createProfile = async (profileToAdd) => {
 //delete profile
 const deleteProfile = async (id) => {
     try {
-        const deletedProfile = await db.one(`DELETE FROM profiles WHERE id=$1 RETURNING *`, id)
+        const deletedProfile = await db.one('DELETE FROM profiles WHERE id=$1 RETURNING *', id)
         return deletedProfile
     }catch (error) {
         return error
@@ -48,7 +48,7 @@ const deleteProfile = async (id) => {
 //update profile
 const updateProfile = async (id, profile) => {
     try {
-        const updatedProfile = await db.one(`UPDATE profiles SET username=$1, password=$2, address=$3, email=$4 WHERE id=$5 RETURNING *`, [profile.username, profile.password, profile.address, profile.email, id])
+        const updatedProfile = await db.one('UPDATE profiles SET username=$1, password=$2, address=$3, email=$4 WHERE id=$5 RETURNING *', [profile.username, profile.password, profile.address, profile.email, id])
 
         return updatedProfile
     } catch (error) {

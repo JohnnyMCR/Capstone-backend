@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS carevillage_dev;
 
 CREATE DATABASE carevillage_dev;
 
-\c carevillage_dev
+\c carevillage_dev;
 
 
 CREATE TABLE profiles (
@@ -19,8 +19,8 @@ CREATE TABLE forums (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES profiles (id),
     title VARCHAR NOT NULL,
-    content VARCHAR NOT NULL,
-    date VARCHAR NOT NULL,
+    content TEXT NOT NULL,
+    date TIMESTAMP NOT NULL, 
     category VARCHAR NOT NULL
 );
 
@@ -63,6 +63,11 @@ CREATE TABLE likes (
     user_id INTEGER REFERENCES profiles (id)
 );
 
+DROP TABLE IF EXISTS category;
 
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) 
+);
 
 

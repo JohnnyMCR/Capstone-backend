@@ -7,6 +7,8 @@ const {
     deleteForum,
     updateForum
 } = require('../queries/forums');
+const commentContoller = require('./commentController');
+forums.use('/:forumsId/comments', commentContoller);
 
 
 //show all forums
