@@ -4,13 +4,14 @@ CREATE DATABASE carevillage_dev;
 
 \c carevillage_dev;
 
+DROP TABLE IF EXISTS profiles;
 
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     address VARCHAR NOT NULL,
-    email VARCHAR NOT NULL
+    email VARCHAR NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS forums;
@@ -20,7 +21,7 @@ CREATE TABLE forums (
     user_id INTEGER REFERENCES profiles (id),
     title VARCHAR NOT NULL,
     content TEXT NOT NULL,
-    date TIMESTAMP NOT NULL, 
+    date DATE NOT NULL, 
     category VARCHAR NOT NULL
 );
 
@@ -30,8 +31,8 @@ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER REFERENCES forums (id),
     user_id INTEGER REFERENCES profiles (id),
-    content VARCHAR NOT NULL,
-    date VARCHAR NOT NULL
+    content TEXT NOT NULL,
+    date DATE NOT NULL
 );
 
 DROP TABLE IF EXISTS donations;
@@ -42,7 +43,7 @@ CREATE TABLE donations (
     category VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
-    date VARCHAR NOT NULL,
+    date DATE NOT NULL,
     img VARCHAR
 );
 
@@ -53,21 +54,23 @@ CREATE TABLE donations_comments (
     donation_post_id INTEGER REFERENCES donations (id),
     user_id INTEGER REFERENCES profiles (id),
     content VARCHAR NOT NULL,
-    date VARCHAR NOT NULL
+    date DATE NOT NULL
 );
 
 DROP TABLE IF EXISTS likes;
 
 CREATE TABLE likes (
     post_id INTEGER REFERENCES forums (id),
-    user_id INTEGER REFERENCES profiles (id)
+    user_id INTEGER REFERENCES profiles (id),
+    PRIMARY KEY (post_id, user_id) 
 );
 
-DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS categories;
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) 
+    name VARCHAR(255) NOT NULL
 );
+
 
 

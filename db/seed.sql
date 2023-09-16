@@ -2,19 +2,23 @@
 
 INSERT INTO profiles (username, password, address, email)
 VALUES
-  ('john_doe', 'passwword1', '123 Main St', 'john@example.com'),
-  ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com');
+  ('john_doe', 'password1', '123 Main St', 'john@example.com'),
+  ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com'),
+      ('user3', 'password3', '789 Oak St', 'user3@example.com');
+
 
 INSERT INTO forums (user_id, title, content, date, category)
 VALUES
-  (1, 'Introduction to Programming', 'Hello everyone! I wanted to share my excitement about learning programming.', '2023-08-01 00:00:00', 'Technology'),
-  (1, 'Favorite Programming Languages', 'What are your favorite programming languages and why?', '2023-08-05 00:00:00', 'Technology');
+  (1, 'Forum 1', 'This is the content of Forum 1.', '2023-09-16', 'General'),
+    (2, 'Forum 2', 'This is the content of Forum 2.', '2023-09-17', 'Tech'),
+    (3, 'Forum 3', 'This is the content of Forum 3.', '2023-09-18', 'Science');
   
 
 INSERT INTO comments (post_id, user_id, content, date)
 VALUES
-  (1, 2, 'I completely agree! Learning programming is such an exciting journey.', '2023-08-02'),
-  (2, 2, 'I love Python for its simplicity and versatility.', '2023-08-06');
+  (1, 1, 'Comment 1 on Forum 1', '2023-09-16'),
+    (2, 2, 'Comment 1 on Forum 2', '2023-09-17'),
+    (3, 3, 'Comment 1 on Forum 3', '2023-09-18');
 
   INSERT INTO categories (name)
 VALUES

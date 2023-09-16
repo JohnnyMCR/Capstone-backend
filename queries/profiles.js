@@ -1,10 +1,5 @@
 const db = require(`../db/dbConfig`)
 
-// queries goes in hand for the database this is psql
-// sending it to controllers
-
-// index of all profiles
-
 const getAllProfiles = async () => {
     try {
         const allProfiles = await db.any('SELECT * FROM profiles')
