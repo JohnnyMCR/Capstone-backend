@@ -10,7 +10,7 @@ CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    address VARCHAR NOT NULL,
+    zipcode INTEGER NOT NULL,
     email VARCHAR NOT NULL UNIQUE
 );
 
@@ -19,10 +19,10 @@ DROP TABLE IF EXISTS forums;
 CREATE TABLE forums (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES profiles (id),
-    title VARCHAR NOT NULL,
-    content TEXT NOT NULL,
-    date DATE NOT NULL, 
-    category VARCHAR NOT NULL
+    title VARCHAR ,
+    content TEXT ,
+    date DATE, 
+    category VARCHAR
 );
 
 DROP TABLE IF EXISTS comments;
@@ -31,8 +31,8 @@ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     post_id INTEGER REFERENCES forums (id),
     user_id INTEGER REFERENCES profiles (id),
-    content TEXT NOT NULL,
-    date DATE NOT NULL
+    content TEXT ,
+    date DATE 
 );
 
 DROP TABLE IF EXISTS donations;

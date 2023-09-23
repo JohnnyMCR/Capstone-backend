@@ -1,10 +1,10 @@
 \c carevillage_dev;
 
-INSERT INTO profiles (username, password, address, email)
+INSERT INTO profiles (username, password, zipcode, email)
 VALUES
-  ('john_doe', 'password1', '123 Main St', 'john@example.com'),
-  ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com'),
-      ('user3', 'password3', '789 Oak St', 'user3@example.com');
+  ('john_doe', 'password1', '11105', 'john@example.com'),
+  ('jane_smith', 'password2', '11103', 'jane@example.com'),
+      ('user3', 'password3', '11234', 'user3@example.com');
 
 
 INSERT INTO forums (user_id, title, content, date, category)

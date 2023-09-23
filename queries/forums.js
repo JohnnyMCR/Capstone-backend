@@ -1,13 +1,24 @@
 const db = require(`../db/dbConfig`)
 
+// const getAllForums = async () => {
+//     try {
+//         const allForums = await db.any('SELECT * FROM forums')
+//         return allForums; 
+//     } catch (error) {
+//         return error
+//     }
+// }
 const getAllForums = async () => {
-    try {
-        const allForums = await db.any('SELECT * FROM forums')
-        return allForums; 
-    } catch (error) {
-        return error
-    }
-}
+  try {
+    const allForums = await db.any('SELECT *, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums');
+    return allForums.map((forum) => ({
+      ...forum,
+      date: forum.formatted_date, // Replace the date property with the formatted date
+    }));
+  } catch (error) {
+    return error;
+  }
+};
 
 //show a forum
 
