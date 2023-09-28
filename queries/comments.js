@@ -23,7 +23,7 @@ const getAComment = async (id) => {
 //create a comment
 const createComment = async (commentToAdd) => {
     try {
-        const newComment = await db.one('INSERT INTO comments (post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *', [commentToAdd.post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newComment = await db.one('INSERT INTO comments (post_id, profile_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *', [commentToAdd.post_id, commentToAdd.profile_id, commentToAdd.content, commentToAdd.date])
         return newComment
     } catch (error) {
         return error
@@ -43,7 +43,7 @@ const deleteComment = async (id) => {
 //update comment
 const updateComment = async (id, comment) => {
     try {
-        const updatedComment = await db.one('UPDATE comments SET post_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *', [comment.post_id, comment.user_id, comment.content, comment.date, id])
+        const updatedComment = await db.one('UPDATE comments SET post_id=$1, profile_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *', [comment.post_id, comment.profile_id, comment.content, comment.date, id])
 
         return updatedComment
     } catch (error) {

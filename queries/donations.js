@@ -28,7 +28,7 @@ const getADonation = async (id) => {
 //create a donation
 const createDonation = async (donationToAdd) => {
     try {
-        const newDonation = await db.one(`INSERT INTO donations (user_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [donationToAdd.user_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
+        const newDonation = await db.one(`INSERT INTO donations (profile_id, category, title, description, date, img) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [donationToAdd.profile_id, donationToAdd.category, donationToAdd.title, donationToAdd.description, donationToAdd.date, donationToAdd.img])
         return newDonation
     } catch (error) {
         return error
@@ -48,7 +48,7 @@ const deleteDonation = async (id) => {
 //update donation
 const updateDonation = async (id, donation) => {
     try {
-        const updatedDonation = await db.one(`UPDATE donations SET user_id=$1, category=$2, title=$3, description=$4, date=$5, img=$6 WHERE id=$7 RETURNING *`, [donation.user_id, donation.category, donation.title, donation.description, donation.date, donation.img, id])
+        const updatedDonation = await db.one(`UPDATE donations SET profile_id=$1, category=$2, title=$3, description=$4, date=$5, img=$6 WHERE id=$7 RETURNING *`, [donation.profile_id, donation.category, donation.title, donation.description, donation.date, donation.img, id])
 
         return updatedDonation
     } catch (error) {

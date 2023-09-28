@@ -17,8 +17,8 @@ CREATE TABLE profiles (
 DROP TABLE IF EXISTS forums;
 
 CREATE TABLE forums (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES profiles (id),
+    post_id SERIAL PRIMARY KEY,
+    profile_id INTEGER REFERENCES profiles (id),
     title VARCHAR ,
     content TEXT ,
     date DATE, 
@@ -29,8 +29,8 @@ DROP TABLE IF EXISTS comments;
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    post_id INTEGER REFERENCES forums (id),
-    user_id INTEGER REFERENCES profiles (id),
+    post_id INTEGER REFERENCES forums (post_id),
+    profile_id INTEGER REFERENCES profiles (id),
     content TEXT ,
     date DATE 
 );
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS donations;
 
 CREATE TABLE donations (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES profiles (id),
+    profile_id INTEGER REFERENCES profiles (id),
     category VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS donations_comments;
 CREATE TABLE donations_comments (
     id SERIAL PRIMARY KEY,
     donation_post_id INTEGER REFERENCES donations (id),
-    user_id INTEGER REFERENCES profiles (id),
+    profile_id INTEGER REFERENCES profiles (id),
     content VARCHAR NOT NULL,
     date DATE NOT NULL
 );
@@ -60,9 +60,9 @@ CREATE TABLE donations_comments (
 DROP TABLE IF EXISTS likes;
 
 CREATE TABLE likes (
-    post_id INTEGER REFERENCES forums (id),
-    user_id INTEGER REFERENCES profiles (id),
-    PRIMARY KEY (post_id, user_id) 
+    post_id INTEGER REFERENCES forums (post_id),
+    profile_id INTEGER REFERENCES profiles (id),
+    PRIMARY KEY (post_id, profile_id) 
 );
 
 DROP TABLE IF EXISTS categories;

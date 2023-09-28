@@ -29,7 +29,7 @@ const getADonationsComment = async (id) => {
 //create a donation comment
 const createDonationsComment = async (commentToAdd) => {
     try {
-        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donation_post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [commentToAdd.donation_post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donation_post_id, profile_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [commentToAdd.donation_post_id, commentToAdd.profile_id, commentToAdd.content, commentToAdd.date])
         return newDonationsComment
     } catch (error) {
         return error
@@ -49,7 +49,7 @@ const deleteDonationsComment = async (id) => {
 //update comment
 const updateDonationsComment = async (id, comment) => {
     try {
-        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donation_post_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *`, [comment.donations_post_id, comment.user_id, comment.content, comment.date, id])
+        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donation_post_id=$1, profile_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *`, [comment.donations_post_id, comment.profile_id, comment.content, comment.date, id])
 
         return updatedDonationsComment
     } catch (error) {
