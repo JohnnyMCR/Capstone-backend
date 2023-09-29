@@ -6,13 +6,13 @@ VALUES
   ('new_parent2', 'password2', '11103', 'parent2@example.com'),
   ('expecting_parent1', 'password3', '11234', 'expecting1@example.com');
 
-INSERT INTO forums (profile_id, title, content, date, category)
+INSERT INTO forums (user_id, title, content, date, category)
 VALUES
   (1, 'New Parent Forum 1', 'This is the content of New Parent Forum 1.', '2023-09-16', 'Newborn'),
   (2, 'New Parent Forum 2', 'This is the content of New Parent Forum 2.', '2023-09-17', 'Expecting'),
   (3, 'New Parent Forum 3', 'This is the content of New Parent Forum 3.', '2023-09-18', 'Newborn');
 
-INSERT INTO comments (post_id, profile_id, content, date)
+INSERT INTO comments (post_id, user_id, content, date)
 VALUES
   (1, 1, 'Comment 1 on New Parent Forum 1', '2023-09-16'),
   (2, 2, 'Comment 1 on New Parent Forum 2', '2023-09-17'),
@@ -23,7 +23,7 @@ VALUES
   ('Newborn'),
   ('Expecting');
 
-INSERT INTO donations (profile_id, category, title, description, date)
+INSERT INTO donations (user_id, category, title, description, date)
 VALUES
   (1, 'Charity', 'Supporting Local Baby Supplies Drive', 'Donating baby supplies for newborns in need.', '2023-08-10'),
   (2, 'Education', 'Donating Parenting Books', 'Contributing parenting books for expecting parents.', '2023-08-15');
