@@ -24,8 +24,8 @@ const getAllForums = async () => {
 
 const getAForum = async (post_id) => {
     try {
-        const comments = await db.one('SELECT comments.*, profiles.username AS username FROM comments JOIN profiles ON comments.user_id=profiles.id WHERE comments.post_id = $1;', post_id)
-        return comments
+        const forum = await db.one('SELECT * FROM forums WHERE post_id=$1', post_id)
+        return forum
     } catch (error) {
         return error
     }

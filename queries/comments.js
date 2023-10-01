@@ -1,8 +1,11 @@
 const db = require(`../db/dbConfig`)
 
-const getAllComments = async () => {
+const getAllComments = async (post_id) => {
+    console.log(post_id)
     try {
-        const allComments = await db.any('SELECT * FROM comments')
+        const allComments = await db.any('SELECT comments.*, profiles.username AS username FROM comments JOIN profiles ON comments.user_id=profiles.id WHERE comments.post_id = $1;', post_id)
+        // const allComments = await db.any('SELECT * FROM comments')
+        console.log(allComments)
         return allComments; 
     } catch (error) {
         return error
