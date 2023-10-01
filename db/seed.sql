@@ -1,23 +1,33 @@
+\c carevillage_dev;
 
-INSERT INTO profiles (username, password, address, email)
+
+INSERT INTO profiles (username, password, zipcode, email)
 VALUES
-  ('john_doe', 'passwword1', '123 Main St', 'john@example.com'),
-  ('jane_smith', 'password2', '456 Elm Ave', 'jane@example.com');
+  ('new_parent1', 'password1', '11105', 'parent1@example.com'),
+  ('new_parent2', 'password2', '11103', 'parent2@example.com'),
+  ('expecting_parent1', 'password3', '11234', 'expecting1@example.com');
 
 INSERT INTO forums (user_id, title, content, date, category)
 VALUES
-  (1, 'Introduction to Programming', 'Hello everyone! I wanted to share my excitement about learning programming.', '2023-08-01', 'Technology'),
-  (1, 'Favorite Programming Languages', 'What are your favorite programming languages and why?', '2023-08-05', 'Technology');
+  (1, 'New Parent Forum 1', 'This is the content of New Parent Forum 1.', '2023-09-16', 'Newborn'),
+  (2, 'New Parent Forum 2', 'This is the content of New Parent Forum 2.', '2023-09-17', 'Expecting'),
+  (3, 'New Parent Forum 3', 'This is the content of New Parent Forum 3.', '2023-09-18', 'Newborn');
 
 INSERT INTO comments (post_id, user_id, content, date)
 VALUES
-  (1, 2, 'I completely agree! Learning programming is such an exciting journey.', '2023-08-02'),
-  (2, 2, 'I love Python for its simplicity and versatility.', '2023-08-06');
+  (1, 1, 'Comment 1 on New Parent Forum 1', '2023-09-16'),
+  (2, 2, 'Comment 1 on New Parent Forum 2', '2023-09-17'),
+  (3, 3, 'Comment 1 on New Parent Forum 3', '2023-09-18');
+
+INSERT INTO categories (name)
+VALUES
+  ('Newborn'),
+  ('Expecting');
 
 INSERT INTO donations (user_id, category, title, description, date)
 VALUES
-  (1, 'Charity', 'Supporting Local Food Drive', 'Donating non-perishable food items for the community food drive.', '2023-08-10'),
-  (1, 'Education', 'Donating Books for Local School', 'Contributing books for the school library to encourage reading among students.', '2023-08-15');
+  (1, 'Charity', 'Supporting Local Baby Supplies Drive', 'Donating baby supplies for newborns in need.', '2023-08-10'),
+  (2, 'Education', 'Donating Parenting Books', 'Contributing parenting books for expecting parents.', '2023-08-15');
 
 
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const comments = express.Router();
+const comments = express.Router({mergeParams: true});
 const {
     getAllComments,
     getAComment,
@@ -11,13 +11,14 @@ const {
 
 
 comments.get("/", async (req, res) => {
-    const allComments = await getAllComments();
-    if (allComments) {
-        return res.status(202).json(allComments);
-    } else {
-        res.status(500).json({error: "Server Error"})
-    };
-});
+    const { forumsId } = req.params;
+    try{
+        const allComments = await getAllComments(forumsId)
+        res.json(allComments)
+    }catch (err) {
+        res.json(err)
+    }
+  });
 
 comments.get("/:id", async (req, res) => {
     const {id} = req.params

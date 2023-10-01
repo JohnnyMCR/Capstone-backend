@@ -18,11 +18,13 @@ profiles.get("/", async (req, res) => {
     };
 });
 
+
+
 profiles.get("/:id", async (req, res) => {
     const {id} = req.params
     const aProfile = await getAProfile(id);
     if (aProfile) {
-        return res.status(202).json(aProfile);
+        return res.status(200).json(aProfile);
     } else {
         res.status(500).json({error: "Server Error"})
     };
