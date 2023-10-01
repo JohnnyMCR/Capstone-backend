@@ -1,5 +1,6 @@
 \c carevillage_dev;
 
+
 INSERT INTO profiles (username, password, zipcode, email)
 VALUES
   ('new_parent1', 'password1', '11105', 'parent1@example.com'),
