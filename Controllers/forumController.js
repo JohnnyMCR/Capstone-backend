@@ -15,7 +15,7 @@ forums.use('/:forumsId/comments', commentContoller);
 forums.get("/", async (req, res) => {
     const allForums = await getAllForums();
     if (allForums) {
-        return res.status(202).json(allForums);
+        return res.status(200).json(allForums);
     } else {
         res.status(500).json({error: "Server Error"})
     };
