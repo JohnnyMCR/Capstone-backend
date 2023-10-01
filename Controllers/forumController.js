@@ -21,12 +21,12 @@ forums.get("/", async (req, res) => {
     };
 });
 
-//show single forum
-forums.get('/:id', async (req, res) => {
+//show single forum comments
+forums.get('/:id/comments', async (req, res) => {
     const { id } = req.params;
-    const forum = await getAForum(id);
-    if (forum) {
-        res.status(200).json(forum);
+    const comments = await getAForum(id);
+    if (comments) {
+        res.status(200).json(comments);
     } else {
         res.status(500).json({ error: 'Server Error'});
     };

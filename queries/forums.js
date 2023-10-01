@@ -10,7 +10,7 @@ const db = require(`../db/dbConfig`)
 // }
 const getAllForums = async () => {
   try {
-    const allForums = await db.any('SELECT *, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums');
+    const allForums = await db.any('SELECT forums.*, profiles.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums JOIN profiles ON forums.user_id=profiles.id');
     return allForums.map((forum) => ({
       ...forum,
       date: forum.formatted_date, 
@@ -24,8 +24,8 @@ const getAllForums = async () => {
 
 const getAForum = async (post_id) => {
     try {
-        const forum = await db.one('SELECT * FROM forums WHERE post_id=$1', post_id)
-        return forum
+        const comments = await db.one('SELECT comments.*, profiles.username AS username FROM comments JOIN profiles ON comments.user_id=profiles.id WHERE comments.post_id = $1;', post_id)
+        return comments
     } catch (error) {
         return error
     }
