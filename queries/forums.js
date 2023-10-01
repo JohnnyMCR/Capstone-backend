@@ -10,7 +10,7 @@ const db = require(`../db/dbConfig`)
 // }
 const getAllForums = async () => {
   try {
-    const allForums = await db.any('SELECT forums.*, profiles.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums JOIN profiles ON forums.user_id=profiles.id');
+    const allForums = await db.any('SELECT forums.*, users.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums JOIN users ON forums.user_id=users.id');
     return allForums.map((forum) => ({
       ...forum,
       date: forum.formatted_date, 
