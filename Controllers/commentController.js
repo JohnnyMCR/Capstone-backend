@@ -11,6 +11,7 @@ const {
 
 
 comments.get("/", async (req, res) => {
+    console.log("in the comments controller")
     const { forumsId } = req.params;
     try{
         const allComments = await getAllComments(forumsId)
