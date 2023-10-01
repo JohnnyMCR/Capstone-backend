@@ -23,7 +23,7 @@ const getALike = async (id) => {
 //create a like
 const createLike = async (likeToAdd) => {
     try {
-        const newLike = await db.one(`INSERT INTO likes (post_id, user_id) VALUES ($1, $2) RETURNING *` [likeToAdd.post_id, likeToAdd.user_id])
+        const newLike = await db.one(`INSERT INTO likes (forum_id, user_id) VALUES ($1, $2) RETURNING *` [likeToAdd.forum_id, likeToAdd.user_id])
         return newLike
     } catch (error) {
         return error
@@ -43,7 +43,7 @@ const deleteLike = async (id) => {
 //update like
 const updateLike = async (id, like) => {
     try {
-        const updatedLike = await db.one(`UPDATE likes SET post_id=$1, user_id=$2 WHERE id=$3 RETURNING *`, [like.post_id, like.user_id, id])
+        const updatedLike = await db.one(`UPDATE likes SET forum_id=$1, user_id=$2 WHERE id=$3 RETURNING *`, [like.forum_id, like.user_id, id])
 
         return updatedLike
     } catch (error) {

@@ -1,7 +1,4 @@
-
-
-
-INSERT INTO profiles (username, password, zipcode, email)
+INSERT INTO users (username, password, zipcode, email)
 VALUES
   ('new_parent1', 'password1', '11105', 'parent1@example.com'),
   ('new_parent2', 'password2', '11103', 'parent2@example.com'),
@@ -13,7 +10,7 @@ VALUES
   (2, 'New Parent Forum 2', 'This is the content of New Parent Forum 2.', '2023-09-17', 'Expecting'),
   (3, 'New Parent Forum 3', 'This is the content of New Parent Forum 3.', '2023-09-18', 'Newborn');
 
-INSERT INTO comments (post_id, user_id, content, date)
+INSERT INTO comments (forum_id, user_id, content, date)
 VALUES
   (1, 1, 'Comment 1 on New Parent Forum 1', '2023-09-16'),
   (2, 2, 'Comment 1 on New Parent Forum 2', '2023-09-17'),
