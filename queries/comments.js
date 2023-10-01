@@ -1,16 +1,16 @@
 const db = require(`../db/dbConfig`)
 
-const getAllComments = async (post_id) => {
-    console.log(post_id)
+const getAllComments = async (forum_id) => {
+    console.log(forum_id)
     try {
-        const allComments = await db.any('SELECT comments.*, profiles.username AS username FROM comments JOIN profiles ON comments.user_id=profiles.id WHERE comments.post_id = $1;', post_id)
-        // const allComments = await db.any('SELECT * FROM comments')
+        const allComments = await db.any('SELECT comments.*, users.username AS username FROM comments JOIN users ON comments.user_id=users.id WHERE comments.forum_id = $1', forum_id);
         console.log(allComments)
         return allComments; 
     } catch (error) {
         return error
     }
 }
+        // const allComments = await db.any('SELECT * FROM comments')
 
 //show a comment
 
@@ -26,7 +26,7 @@ const getAComment = async (id) => {
 //create a comment
 const createComment = async (commentToAdd) => {
     try {
-        const newComment = await db.one('INSERT INTO comments (post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *', [commentToAdd.post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newComment = await db.one('INSERT INTO comments (forum_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *', [commentToAdd.forum_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
         return newComment
     } catch (error) {
         return error
@@ -46,7 +46,7 @@ const deleteComment = async (id) => {
 //update comment
 const updateComment = async (id, comment) => {
     try {
-        const updatedComment = await db.one('UPDATE comments SET post_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *', [comment.post_id, comment.user_id, comment.content, comment.date, id])
+        const updatedComment = await db.one('UPDATE comments SET forum_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *', [comment.forum_id, comment.user_id, comment.content, comment.date, id])
 
         return updatedComment
     } catch (error) {

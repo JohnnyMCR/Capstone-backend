@@ -5,7 +5,7 @@ const logger = require("morgan");
 const forumsController = require('./Controllers/forumController.js');
 const donationsController = require('./Controllers/donationsController.js');
 const commentController = require('./Controllers/commentController.js');
-const profileController = require('./Controllers/profileController.js');
+const userController = require('./Controllers/userController.js');
 const categoryController = require('./Controllers/categoryController.js')
 
 
@@ -16,7 +16,7 @@ app.use(logger('dev'));
 app.use("/forums", forumsController);
 app.use("/donations", donationsController);
 app.use("/comments", commentController);
-app.use("/profiles", profileController);
+app.use("/users", userController);
 app.use("/categories", categoryController);
 
 app.get("/", (req, res) => {

@@ -10,7 +10,7 @@ const db = require(`../db/dbConfig`)
 // }
 const getAllForums = async () => {
   try {
-    const allForums = await db.any('SELECT forums.*, profiles.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums JOIN profiles ON forums.user_id=profiles.id');
+    const allForums = await db.any('SELECT forums.*, users.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM forums JOIN users ON forums.user_id=users.id');
     return allForums.map((forum) => ({
       ...forum,
       date: forum.formatted_date, 
@@ -22,9 +22,9 @@ const getAllForums = async () => {
 
 //show a forum
 
-const getAForum = async (post_id) => {
+const getAForum = async (id) => {
     try {
-        const forum = await db.one('SELECT * FROM forums WHERE post_id=$1', post_id)
+        const forum = await db.one('SELECT * FROM forums WHERE id=$1', id)
         return forum
     } catch (error) {
         return error
@@ -43,9 +43,9 @@ const createForum = async (forumToAdd) => {
 }
 
 //delete forum
-const deleteForum = async (post_id) => {
+const deleteForum = async (id) => {
     try {
-        const deletedForum = await db.one('DELETE FROM forums WHERE post_id=$1 RETURNING *', post_id)
+        const deletedForum = await db.one('DELETE FROM forums WHERE id=$1 RETURNING *', id)
         return deletedForum
     }catch (error) {
         return error
@@ -53,9 +53,9 @@ const deleteForum = async (post_id) => {
 }
 
 //update forum
-const updateForum = async (post_id, forum) => {
+const updateForum = async (id, forum) => {
     try {
-        const updatedForum = await db.one('UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5 WHERE id=$6 RETURNING *', [forum.user_id, forum.title, forum.content, forum.date, forum.category, post_id])
+        const updatedForum = await db.one('UPDATE forums SET user_id=$1, title=$2, content=$3, date=$4, category=$5 WHERE id=$6 RETURNING *', [forum.user_id, forum.title, forum.content, forum.date, forum.category, id])
 
         return updatedForum
     } catch (error) {
