@@ -1,8 +1,8 @@
-CREATE DATABASE carevillage_dev;
-
-\c carevillage_dev;
-
-
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS likes;
+DROP TABLE IF EXISTS forums;
+DROP TABLE IF EXISTS donations_comments;
+DROP TABLE IF EXISTS donations;
 DROP TABLE IF EXISTS profiles;
 
 CREATE TABLE profiles (
@@ -13,7 +13,7 @@ CREATE TABLE profiles (
     email VARCHAR NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS forums;
+
 
 CREATE TABLE forums (
     post_id SERIAL PRIMARY KEY,
@@ -24,7 +24,7 @@ CREATE TABLE forums (
     category VARCHAR
 );
 
-DROP TABLE IF EXISTS comments;
+
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
@@ -34,7 +34,7 @@ CREATE TABLE comments (
     date DATE 
 );
 
-DROP TABLE IF EXISTS donations;
+
 
 CREATE TABLE donations (
     id SERIAL PRIMARY KEY,
@@ -46,7 +46,7 @@ CREATE TABLE donations (
     img VARCHAR
 );
 
-DROP TABLE IF EXISTS donations_comments;
+
 
 CREATE TABLE donations_comments (
     id SERIAL PRIMARY KEY,
@@ -56,7 +56,7 @@ CREATE TABLE donations_comments (
     date DATE NOT NULL
 );
 
-DROP TABLE IF EXISTS likes;
+
 
 CREATE TABLE likes (
     post_id INTEGER REFERENCES forums (post_id),
