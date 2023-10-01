@@ -1,4 +1,4 @@
-\c carevillage_dev;
+
 
 
 INSERT INTO profiles (username, password, zipcode, email)
