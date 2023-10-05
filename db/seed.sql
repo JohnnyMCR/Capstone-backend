@@ -26,6 +26,9 @@ VALUES
   (1, 'Charity', 'Supporting Local Baby Supplies Drive', 'Donating baby supplies for newborns in need.', '2023-08-10'),
   (2, 'Education', 'Donating Parenting Books', 'Contributing parenting books for expecting parents.', '2023-08-15');
 
-
+INSERT INTO donations_comments (donations_id, user_id, content, date)
+VALUES
+  (1, 1, 'Comment 1 on New Parent Donation 1', '2023-09-16'),
+  (2, 2, 'Comment 1 on New Parent Donation 2', '2023-09-17');
 
 

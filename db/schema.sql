@@ -50,7 +50,7 @@ CREATE TABLE donations (
 
 CREATE TABLE donations_comments (
     id SERIAL PRIMARY KEY,
-    donation_post_id INTEGER REFERENCES donations (id),
+    donations_id INTEGER REFERENCES donations (id),
     user_id INTEGER REFERENCES users (id),
     content VARCHAR NOT NULL,
     date DATE NOT NULL

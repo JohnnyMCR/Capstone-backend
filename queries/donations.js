@@ -7,7 +7,7 @@ const db = require(`../db/dbConfig`)
 
 const getAllDonations = async () => {
     try {
-        const allDonations = await db.any(`SELECT * FROM donations`)
+        const allDonations = await db.any('SELECT donations.*, users.username AS username, to_char(date, \'MM-DD-YY\') as formatted_date FROM donations JOIN users ON donations.user_id=users.id')
         return allDonations; 
     } catch (error) {
         return error
