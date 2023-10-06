@@ -1,4 +1,5 @@
 const express = require('express');
+const donations = express.Router();
 const {
     getAllDonations,
     getADonation,
@@ -6,7 +7,8 @@ const {
     deleteDonation,
     updateDonation
 } = require('../queries/donations');
-const donations = express.Router();
+const donationCommentContoller = require('./donationCommentController');
+donations.use('/:donationsId/donation-comments', donationCommentContoller);
 
 
 donations.get("/", async (req, res) => {

@@ -33,6 +33,7 @@ comments.get("/:id", async (req, res) => {
 
 comments.post("/", async (req, res) => {
     const newComment = req.body;
+    console.log(newComment)
     try {
         const createdComment = await createComment(newComment)
         res.status(200).json(createdComment);

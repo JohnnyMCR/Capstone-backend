@@ -1,14 +1,10 @@
 const db = require(`../db/dbConfig`)
 
-// queries goes in hand for the database this is psql
-// sending it to controllers
-
-// index of all donation comments
-
-
-const getAllDonationsComments = async () => {
+const getAllDonationsComments = async (donations_id) => {
     try {
-        const allDonationsComments = await db.any(`SELECT * FROM donations_comments`)
+        const allDonationsComments = await db.any('SELECT donations_comments.*, users.username AS username FROM donations_comments JOIN users ON donations_comments.user_id=users.id WHERE donations_comments.donations_id = $1', donations_id);
+        console.log(allDonationsComments)
+
         return allDonationsComments; 
     } catch (error) {
         return error
@@ -27,9 +23,9 @@ const getADonationsComment = async (id) => {
 }
 
 //create a donation comment
-const createDonationsComment = async (commentToAdd) => {
+const createDonationsComment = async (donationCommentToAdd) => {
     try {
-        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donation_post_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [commentToAdd.donation_post_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        const newDonationsComment = await db.one(`INSERT INTO donations_comments (donations_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *`, [donationCommentToAdd.donations_id, donationCommentToAdd.user_id, donationCommentToAdd.content, donationCommentToAdd.date])
         return newDonationsComment
     } catch (error) {
         return error
@@ -47,9 +43,9 @@ const deleteDonationsComment = async (id) => {
 }
 
 //update comment
-const updateDonationsComment = async (id, comment) => {
+const updateDonationsComment = async (id, donationComment) => {
     try {
-        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donation_post_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *`, [comment.donations_post_id, comment.user_id, comment.content, comment.date, id])
+        const updatedDonationsComment = await db.one(`UPDATE donations_comments SET donations_id=$1, user_id=$2, content=$3, date=$4 WHERE id=$5 RETURNING *`, [donationComment.donations_id, donationComment.user_id, donationComment.content, donationComment.date, id])
 
         return updatedDonationsComment
     } catch (error) {

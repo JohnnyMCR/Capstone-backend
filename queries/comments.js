@@ -10,7 +10,7 @@ const getAllComments = async (forum_id) => {
         return error
     }
 }
-        // const allComments = await db.any('SELECT * FROM comments')
+        
 
 //show a comment
 
@@ -25,8 +25,10 @@ const getAComment = async (id) => {
 
 //create a comment
 const createComment = async (commentToAdd) => {
+    console.log('Adding a comment',commentToAdd)
     try {
         const newComment = await db.one('INSERT INTO comments (forum_id, user_id, content, date) VALUES ($1, $2, $3, $4) RETURNING *', [commentToAdd.forum_id, commentToAdd.user_id, commentToAdd.content, commentToAdd.date])
+        console.log(newComment)
         return newComment
     } catch (error) {
         return error
