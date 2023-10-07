@@ -31,6 +31,15 @@ const getAForum = async (post_id) => {
     }
 }
 
+const getForumsByUserId = async (userId) => {
+    try {
+        const userForums = await db.any(`SELECT * FROM forums WHERE user_id = $1`, userId);
+        return userForums;
+    } catch (error) {
+        return error;
+    }
+}
+
 //create a forum
 const createForum = async (forumToAdd) => {
     try {
@@ -68,5 +77,6 @@ module.exports = {
     getAForum,
     createForum,
     deleteForum,
+    getForumsByUserId,
     updateForum
 }
