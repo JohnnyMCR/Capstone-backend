@@ -4,6 +4,7 @@ const {
     getAllDonations,
     getADonation,
     createDonation,
+    getDonationsByUserId,
     deleteDonation,
     updateDonation
 } = require('../queries/donations');
@@ -28,6 +29,16 @@ donations.get("/:id", async (req, res) => {
     } else {
         res.status(500).json({error: "Server Error"})
     };
+});
+
+donations.get("/user/:userId", async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const userDonations = await getDonationsByUserId(userId);
+        res.status(200).json(userDonations);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 donations.post("/", async (req, res) => {
