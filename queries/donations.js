@@ -14,6 +14,15 @@ const getAllDonations = async () => {
     }
 }
 
+const getDonationsByUserId = async (userId) => {
+    try {
+        const userDonations = await db.any(`SELECT * FROM donations WHERE user_id = $1`, userId);
+        return userDonations;
+    } catch (error) {
+        return error;
+    }
+}
+
 //show a donation
 
 const getADonation = async (id) => {
@@ -60,6 +69,7 @@ module.exports = {
     getAllDonations,
     getADonation,
     createDonation,
+    getDonationsByUserId,
     deleteDonation,
     updateDonation
 }
