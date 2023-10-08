@@ -5,6 +5,7 @@ const {
     getAForum,
     createForum,
     deleteForum,
+    getForumsByUserId,
     updateForum
 } = require('../queries/forums');
 const commentContoller = require('./commentController');
@@ -15,10 +16,20 @@ forums.use('/:forumsId/comments', commentContoller);
 forums.get("/", async (req, res) => {
     const allForums = await getAllForums();
     if (allForums) {
-        return res.status(202).json(allForums);
+        return res.status(200).json(allForums);
     } else {
         res.status(500).json({error: "Server Error"})
     };
+});
+
+forums.get("/user/:userId", async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const userForums = await getForumsByUserId(userId);
+        res.status(200).json(userForums);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 //show single forum

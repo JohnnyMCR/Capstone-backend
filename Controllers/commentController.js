@@ -11,6 +11,7 @@ const {
 
 
 comments.get("/", async (req, res) => {
+    console.log("in the comments controller")
     const { forumsId } = req.params;
     try{
         const allComments = await getAllComments(forumsId)
@@ -32,6 +33,7 @@ comments.get("/:id", async (req, res) => {
 
 comments.post("/", async (req, res) => {
     const newComment = req.body;
+    console.log(newComment)
     try {
         const createdComment = await createComment(newComment)
         res.status(200).json(createdComment);
